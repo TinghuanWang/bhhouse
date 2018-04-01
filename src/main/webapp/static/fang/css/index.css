@@ -1,0 +1,49 @@
+.bar6{
+	width: 559.9px;
+	height: 56px;
+	float: left;
+	background-color: white;
+}
+.bar7{
+	width: 400px;
+	height: 56px;
+	float: right;
+	background-color: white;
+}
+
+.bar7 form {
+	height: 40px;
+	position: relative;
+	width: 360px;
+	margin: 0 auto;
+	margin-top: 13px;
+}
+.bar7 input {
+	border-radius: 42px;
+	height: 36px;
+	border: 2px solid #324B4E;
+	transition: .3s linear;
+	outline: none;
+	width: 100%;
+	padding-left: 7px;
+	font-size: 16px;
+	font-family: YouYuan;
+	color: #0b0b0b;
+}
+.bar7 button {
+	background: none;
+	top: -2px;
+	right: 0;
+	height: 38px;
+	outline:none;
+	cursor:pointer;
+	border: none;
+	position: absolute;
+	padding-left: 13px;
+}
+.bar7 button:before{
+	content: "\f002";
+	font-family: FontAwesome;
+	color: #324b4e;
+	outline:none;
+}

@@ -1,0 +1,137 @@
+.lplist{
+	width: 960px;
+	height: auto;
+	background-color: white;
+	position: relative;
+	padding-bottom: 60px;
+	padding-top: 20px;
+}
+.listtype{
+	width: 960px;
+	height: 53px;
+	background-color: #F2F2F2;
+	box-shadow: 5px 5px 3px black;
+	border-radius:5px
+}
+
+.listtype .listmag{
+	padding-left: 5px;
+	padding-top: 3px;
+}
+
+.listtype .listtitle{
+	height: 40px;
+	width: 140px;
+	float: left;
+	font-size: 30px;
+	font-family: YouYuan;
+	text-align: center;
+	font-weight: bold;
+	padding-top: 20px;
+	color: #323232;
+}
+
+.listcontent{
+	width: 960px;
+	height: 200px;
+	margin-top: 20px;
+	box-shadow: 5px 5px 3px #99CCCC;
+	border-radius:5px;
+}
+.listimage{
+	height: 200px;
+	width:200px;
+	float: left;
+}
+.listinfo{
+	height: 200px;
+	width: 520px;
+	float: left;
+	margin-left: 20px;
+}
+
+.listinfo h1{
+	margin-top:2px;
+	text-align: left;
+}
+
+.listinfo h1 a{
+	color: black;
+}
+
+.listinfo h4 span{
+	width:660px;
+	height:40px;
+	display:block;
+	overflow: hidden;
+}
+.listprice{
+	height: 200px;
+	width: 180px;
+	float: right;
+	margin-left: 10px;
+}
+
+.listprice .listprice1{
+	color: #F95640;
+	font-size: 35px;
+	font-weight: bold;
+	margin-top: 30px;
+	margin-left: 10px;
+}
+.listprice .listprice2{
+	color: #F95640;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.listprice .listprice3{
+	color: black;
+	font-size: 15px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.bar7 {
+	width: 380px;
+	height: 40px;
+	float: right;
+	margin-top: 8px;
+	float: right;
+}
+.bar7 form {
+	height: 40px;
+	position: relative;
+	width: 360px;
+	margin: 0 auto;
+}
+.bar7 input {
+	border-radius: 42px;
+	height: 36px;
+	border: 2px solid #324B4E;
+	transition: .3s linear;
+	outline: none;
+	width: 100%;
+	padding-left: 7px;
+	font-size: 16px;
+	font-family: YouYuan;
+	color: #0b0b0b;
+}
+.bar7 button {
+	background: none;
+	top: -2px;
+	right: 0;
+	height: 38px;
+	outline:none;
+	cursor:pointer;
+	border: none;
+	position: absolute;
+	padding-left: 13px;
+}
+.bar7 button:before{
+	content: "\f002";
+	font-family: FontAwesome;
+	color: #324b4e;
+	outline:none;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangzhixuan.mapper.DictMapper">
+
+    <resultMap id="dictVoResultMap" type="com.wangzhixuan.model.vo.DictVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="dictname" property="dictName" jdbcType="VARCHAR"/>
+        <result column="dictcode" property="dictCode" jdbcType="VARCHAR"/>
+        <result column="classid" property="classId" jdbcType="BIGINT"/>
+        <result column="ishot" property="isHot" jdbcType="TINYINT"/>
+        <result column="vc_class" property="vcClass" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id,dictname,dictcode,classid,ishot,vc_class as vcClass
+    </sql>
+
+    <select id="getDictsByClassId" resultMap="dictVoResultMap" parameterType="java.lang.String">
+        SELECT
+        id,dictname
+        FROM
+        dict t
+        <where>
+            <if test=" vcClass != null and vcClass != '' ">
+                t.vc_class = #{vcClass}
+            </if>
+        </where>
+    </select>
+
+    <select id="getHotLpAreas" resultMap="dictVoResultMap">
+        SELECT
+        id,dictname
+        FROM
+        dict t
+        where t.vc_class = 'lp_area'
+        and t.ishot = '1'
+        order by id desc limit 4
+    </select>
+</mapper>

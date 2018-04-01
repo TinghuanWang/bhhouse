@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangzhixuan.mapper.HouseMapper">
+
+    <resultMap id="houseVoResultMap" type="com.wangzhixuan.model.vo.HouseVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="lpname" property="lpName" jdbcType="VARCHAR"/>
+        <result column="lptype" property="lpType" jdbcType="VARCHAR"/>
+        <result column="lpprice" property="lpPrice" jdbcType="BIGINT"/>
+        <result column="paystate" property="payState" jdbcType="TINYINT"/>
+        <result column="lparea" property="lparea" jdbcType="VARCHAR"/>
+        <result column="lpInfo" property="lpInfo" jdbcType="VARCHAR"/>
+        <result column="looktimes" property="looktimes" jdbcType="BIGINT"/>
+        <result column="kptime" property="kptime" jdbcType="TIMESTAMP"/>
+        <result column="jftime" property="jftime" jdbcType="TIMESTAMP"/>
+        <result column="lpDizhi" property="lpDizhi" jdbcType="VARCHAR"/>
+        <result column="zxUser" property="zxUser" jdbcType="VARCHAR"/>
+        <result column="zxPhone" property="zxPhone" jdbcType="VARCHAR"/>
+        <result column="isHot" property="isHot" jdbcType="TINYINT"/>
+        <result column="isTuijian" property="isTuijian" jdbcType="TINYINT"/>
+        <result column="sysPerson" property="sysPerson" jdbcType="VARCHAR"/>
+        <result column="sys_Time" property="sysTime" jdbcType="TIMESTAMP"/>
+        <result column="huxing" property="huxing" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, lpname, lpType, lpArea, huxing, sys_time as sysTime, isHot, isTuijian, lpInfo, lpPrice, parState,kpTime,jfTime,lpDizhi,zxUser,zxPhone
+    </sql>
+    <select id="selectHouseVoPage" resultMap="houseVoResultMap">
+        SELECT
+        t.id, lpname, t2.dictname as lpType, t1.dictname as lpArea, huxing, sys_Time, t.isHot, isTuijian, lpInfo,
+        lpPrice, payState,kpTime,jfTime,lpDizhi,zxUser,zxPhone
+        FROM
+        house t,
+        (select a.dictcode,a.id,a.ishot,a.dictname from dict a,dict_class b where a.classid = b.id and b.class =
+        'lp_area') t1,
+        (select a.dictcode,a.id,a.ishot,a.dictname from dict a,dict_class b where a.classid = b.id and b.class =
+        'lp_type') t2
+
+        where t.lparea = t1.id
+        and t.lptype = t2.id
+
+        <if test=" lpName != null and lpName != '' ">
+            and t.lpname LIKE CONCAT('%', #{lpName}, '%')
+        </if>
+        <if test=" lpType != null and lpType != '' ">
+            and t.lpType = #{lpType}
+        </if>
+        <if test=" lparea != null and lparea != '' ">
+            and t.lparea = #{lparea}
+        </if>
+        <if test=" sysTimeStart != null ">
+            <![CDATA[and t.sys_time >= #{sysTimeStart} ]]>
+        </if>
+        <if test=" sysTimeEnd != null ">
+            <![CDATA[ and t.sys_time <= #{sysTimeEnd} ]]>
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,111 @@
+.lpdetail{
+	width:960px;
+	height: auto;
+	background-color: #F2F2F2;
+}
+
+.lpdetail .lptitle{
+	width: 960px;
+	height: 100px;
+	margin-top: 5px;
+	text-align:center;
+}
+
+.lpdetail .lpinfo{
+	width: 960px;
+	height: auto;
+	margin-top: 5px;
+}
+
+.lpdetail .lptitle .lptitle1 {
+	font-family: serif;
+	font-size: 35px;
+	font-weight: bold;
+	padding-top: 29px;
+	color: black;
+}
+.lpinfo1{
+	width: 960px;
+	height: 40px;
+	background:url(../images/bg_title.png) no-repeat;
+	box-shadow: 5px 5px 3px #99CCCC;
+	border-radius:5px;
+}
+.lpinfo2{
+	font-size: 20px;
+	font-weight: bold;
+	color: #87b01a;
+	padding-top: 5px;
+	padding-left: 10px;
+}
+.lpinfo3{
+	width: 960px;
+	height: auto;
+	margin-top: 3px;
+}
+.lpinfo3a{
+	height: 180px;
+	width: 310px;
+	float: left;
+	text-align: center;
+}
+.lpinfo3b{
+	height: 180px;
+	width: 315px;
+	float: left;
+	margin-left: 10px;
+}
+.lpinfo3c{
+	height: 180px;
+	width: 310px;
+	float: right;
+}
+.lpinfo3atab{
+	height: 180px;
+	width: 310px;
+	text-align: center;
+}
+
+.lpinfo3atab th{
+	color: #656661;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: YouYuan;
+}
+
+.lpinfo3atab td{
+	font-size: 14px;
+	font-family: YouYuan;
+	color: black;
+	display:block;
+	overflow: hidden;
+	text-align:left;
+}
+
+.lpxxinfo{
+	width: 960px;
+	height: auto;
+	text-align:center;
+}
+
+.xqimgDiv p{
+	font-size: 18px;
+	font-family: YouYuan;
+	color: black;
+	padding-top: 10px;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+.houseinfo{
+	width: 960px;
+	height: auto;
+}
+.houseinfo p{
+	font-size: 16px;
+	font-family: YouYuan;
+	color: black;
+	word-wrap:break-word;
+	word-break:break-all;
+	display:block;
+	overflow: hidden;
+}

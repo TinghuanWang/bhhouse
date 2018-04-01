@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangzhixuan.mapper.HouseImageMapper">
+
+    <resultMap id="houseImageVoResultMap" type="com.wangzhixuan.model.vo.HouseImgsVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="imgtype" property="imgType" jdbcType="VARCHAR"/>
+        <result column="imgurl" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="imginfo" property="imgInfo" jdbcType="VARCHAR"/>
+        <result column="lpid" property="lpId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id,imgtype,imgurl,imginfo,lpid
+    </sql>
+
+    <select id="getExistImags" resultMap="houseImageVoResultMap" parameterType="java.lang.Long">
+        SELECT
+        id,case when imgtype='0' then '首页轮转图片'
+        when imgtype='1' then '热门推荐图片'
+        when imgtype='2' then '列表图片'
+        else '详情图片' end as imgtype,
+        imgurl,imginfo,lpid
+        FROM
+        houseimgs t
+        <where>
+            <if test=" lpId != null and lpId != '' ">
+                t.lpid = #{lpId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectIndexHotHouses" resultMap="houseImageVoResultMap">
+        select t.id lpid,t1.imgurl,t1.id,t.lpInfo from house t,
+        (select min(a.imgurl) imgurl,min(a.id) id,
+        a.lpid from houseimgs a where a.imgtype = '0' group by a.lpid) t1
+        where t.id = t1.lpid
+        and t.ishot = '1'
+        and t.istuijian = '1'
+        order by t.seq ASC
+    </select>
+
+    <select id="selectHotHouses" resultMap="houseImageVoResultMap">
+        select t.id lpid,t1.imgurl,t1.id,t.lpName,t.lpPrice,t.lpInfo from house t LEFT JOIN
+        (select min(a.imgurl) imgurl,min(a.id) id,
+        a.lpid from houseimgs a where a.imgtype = '1' group by a.lpid) t1
+        on t.id = t1.lpid
+        where t.ishot = '1'
+        order by t.seq ASC
+    </select>
+
+    <select id="selectTuijianHouses" resultMap="houseImageVoResultMap">
+        select t.id lpid,t1.imgurl,t1.id,t.lpName,t.lpPrice,t.lpInfo from house t LEFT JOIN
+        (select min(a.imgurl) imgurl,min(a.id) id,
+        a.lpid from houseimgs a where a.imgtype = '1' group by a.lpid) t1
+        on t.id = t1.lpid
+        where t.istuijian = '1'
+        order by t.seq ASC
+    </select>
+
+    <select id="selectHotHousesByTypeOrArea" resultMap="houseImageVoResultMap" parameterType = "java.util.HashMap">
+        select t.id lpid,t1.imgurl,t1.id,t.lpName,t.lpPrice,t.lpInfo,t.lpDizhi,t.huxing from house t LEFT JOIN
+        (select min(a.imgurl) imgurl,min(a.id) id,
+        a.lpid from houseimgs a where
+        <if test=" ishot != null and ishot == 'ishot' ">
+            a.imgtype = '0'
+        </if>
+        <if test=" ishot == null">
+            a.imgtype = '2'
+        </if>
+        group by a.lpid) t1
+        ON t.id = t1.lpid WHERE  1=1
+        <if test=" typearea != null and typearea == 'lparea' ">
+            and t.lparea = #{id}
+        </if>
+        <if test=" typearea != null and typearea == 'lptype' ">
+            and t.lptype = #{id}
+        </if>
+        <if test=" ishot != null and ishot == 'ishot' ">
+            and t.ishot = '1'
+        </if>
+        order by t.seq ASC
+    </select>
+
+    <select id="selectHouseImg" resultMap="houseImageVoResultMap" parameterType = "java.util.HashMap">
+        select t.id lpid,t1.imgurl,t1.id,t1.imginfo,t.lpName,t.lpPrice,t.lpInfo,t.lpDizhi,t.huxing from house t,
+        (select a.imgurl as  imgurl,a.id as  id,a.imginfo as  imginfo,
+        a.lpid from houseimgs a where 1=1
+        <if test=" type != null and type == 'index' ">
+            and a.imgtype = 0
+        </if>
+        <if test=" type != null and type == 'detail' ">
+            and a.imgtype = 3
+        </if>
+        ) t1
+        where t.id = t1.lpid
+        and t.id = #{id}
+        order by t.seq ASC
+    </select>
+    <select id="findHouseBySearch" resultMap="houseImageVoResultMap" parameterType = "java.util.HashMap">
+        select t.id lpid,t1.imgurl,t1.id,t.lpName,t.lpPrice,t.lpInfo from house t LEFT JOIN
+        (select min(a.imgurl) imgurl,min(a.id) id,
+        a.lpid from houseimgs a where a.imgtype = '2' group by a.lpid) t1
+        on t.id = t1.lpid
+				where  (t.lpname like CONCAT('%', #{vals}, '%') or t.lpinfo like CONCAT('%', #{vals}, '%'))
+        order by t.seq ASC
+    </select>
+</mapper>
